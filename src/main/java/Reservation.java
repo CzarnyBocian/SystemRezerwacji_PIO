@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Reservation {
     private LocalDate dataOd;
@@ -54,5 +55,11 @@ public class Reservation {
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+
+    public double obliczKoszt()
+    {
+        long liczbaNocy = ChronoUnit.DAYS.between(this.dataOd, this.dataDo);
+        return liczbaNocy * this.room.getCenaZaNoc();
     }
 }
