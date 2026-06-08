@@ -19,10 +19,30 @@ public class HotelTest
     void testUtworzRezerwacje_PowinnoDodacRezerwacjeDoListy()
     {
         Hotel hotel = new Hotel();
+        Guest gosc = new Guest("1", "Jan", "Kowalski");
+        Room pokoj = new Room("101", RoomType.STANDARD, 200);
 
-        hotel.utworzRezerwacje();
+        hotel.utworzRezerwacje(LocalDate.now(), LocalDate.now().plusDays(2), gosc, pokoj);
 
         assertEquals(1, hotel.getRezerwacje().size(), "Lista rezerwacji powinna zawierac nowa rezerwacje");
+    }
+
+    @Test
+    void testUtworzRezerwacje_ZajetyPokoj_PowinnoRzucicWyjatek() {
+        Hotel hotel = new Hotel();
+        Guest gosc = new Guest("1", "Jan", "Kowalski");
+        Room pokoj = new Room("101", RoomType.STANDARD, 200);
+
+        LocalDate start = LocalDate.of(2026, 6, 1);
+        LocalDate end = LocalDate.of(2026, 6, 5);
+        hotel.utworzRezerwacje(start, end, gosc, pokoj);
+
+        LocalDate startNakladajacy = LocalDate.of(2026, 6, 3);
+        LocalDate endNakladajacy = LocalDate.of(2026, 6, 7);
+
+        assertThrows(RoomUnavailableException.class, () -> {
+            hotel.utworzRezerwacje(startNakladajacy, endNakladajacy, gosc, pokoj);
+        }, "System powinien zablokować overbooking i rzucić RoomUnavailableException");
     }
 
     @Test
