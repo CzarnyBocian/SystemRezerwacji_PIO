@@ -49,4 +49,27 @@ public class HotelTest
 
         assertEquals(ReservationStatus.ANULOWANA, hotel.getRezerwacje().get(0).getStatus(), "Status rezerwacji powinien zmienic sie na ANULOWANA");
     }
+
+    @Test
+    void testPokojPojawiaSieWWolnychPoAnulowaniuRezerwacji()
+    {
+        Hotel hotel = new Hotel();
+        Room pokoj = new Room("67", RoomType.VIP, 2000);
+        hotel.getPokoje().add(pokoj);
+
+        Guest gosc = new Guest("1", "Tomasz", "Kowalski");
+        LocalDate start = LocalDate.now();
+        LocalDate end = LocalDate.now().plusDays(3);
+
+        Reservation rezerwacja = new Reservation(start, end, gosc, pokoj);
+        hotel.getRezerwacje().add(rezerwacja);
+
+        java.util.List<Room> wolnePrzedAnulowaniem = hotel.wyszukajWolne(start, end);
+        assertFalse(wolnePrzedAnulowaniem.contains(pokoj), "Pokój nie powinien być dostępny, gdy rezerwacja jest aktywna");
+
+        hotel.anuluj();
+
+        java.util.List<Room> wolnePoAnulowaniu = hotel.wyszukajWolne(start, end);
+        assertTrue(wolnePoAnulowaniu.contains(pokoj), "Pokój powinien ponownie pojawić się w wynikach wyszukiwania po anulowaniu");
+    }
 }

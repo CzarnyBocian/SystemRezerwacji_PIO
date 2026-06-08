@@ -12,7 +12,25 @@ public class Hotel {
     }
 
     public List<Room> wyszukajWolne(LocalDate start, LocalDate end) {
-        return new ArrayList<>();
+        List<Room> wolnePokoje = new ArrayList<>();
+
+        for (Room pokoj : pokoje) {
+            boolean czyZajety = false;
+            for (Reservation rezerwacja : rezerwacje) {
+
+                if (rezerwacja.getRoom().equals(pokoj) && rezerwacja.getStatus() != ReservationStatus.ANULOWANA) {
+
+                    if (start.isBefore(rezerwacja.getDataDo()) && end.isAfter(rezerwacja.getDataOd())) {
+                        czyZajety = true;
+                        break;
+                    }
+                }
+            }
+            if (!czyZajety) {
+                wolnePokoje.add(pokoj);
+            }
+        }
+        return wolnePokoje;
     }
 
     public void utworzRezerwacje() {
@@ -23,6 +41,9 @@ public class Hotel {
     }
 
     public void anuluj() {
+        for (Reservation rezerwacja : rezerwacje) {
+            rezerwacja.setStatus(ReservationStatus.ANULOWANA);
+        }
     }
 
     public List<Room> getPokoje() {
