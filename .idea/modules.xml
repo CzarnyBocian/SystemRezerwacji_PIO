@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/SystemRezerwacji_PIO.iml" filepath="$PROJECT_DIR$/.idea/SystemRezerwacji_PIO.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SystemRezerwacji_PIO.iml" filepath="$PROJECT_DIR$/SystemRezerwacji_PIO.iml" />
     </modules>
   </component>
 </project>
