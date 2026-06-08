@@ -40,9 +40,9 @@ public class Hotel {
         return 0.0;
     }
 
-    public void anuluj() {
-        for (Reservation rezerwacja : rezerwacje) {
-            rezerwacja.setStatus(ReservationStatus.ANULOWANA);
+    public void anuluj(Reservation rezerwacjaDoAnulowania) {
+        if (rezerwacje.contains(rezerwacjaDoAnulowania)) {
+            rezerwacjaDoAnulowania.setStatus(ReservationStatus.ANULOWANA);
         }
     }
 
