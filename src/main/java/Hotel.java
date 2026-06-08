@@ -11,11 +11,37 @@ public class Hotel {
         this.rezerwacje = new ArrayList<>();
     }
 
-    public List<Room> wyszukajWolne(LocalDate start, LocalDate end) {
-        return new ArrayList<>();
+    private boolean czyZajety(Room pokoj, LocalDate start, LocalDate end) {
+        for (Reservation r : rezerwacje) {
+            if (r.getRoom().getNumer().equals(pokoj.getNumer())) {
+                if (r.getStatus() != ReservationStatus.ANULOWANA) {
+                    if (start.isBefore(r.getDataDo()) && end.isAfter(r.getDataOd())) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
-    public void utworzRezerwacje() {
+    public List<Room> wyszukajWolne(LocalDate start, LocalDate end) {
+        List<Room> wolnePokoje = new ArrayList<>();
+        for (Room pokoj : pokoje) {
+            if (!czyZajety(pokoj, start, end)) {
+                wolnePokoje.add(pokoj);
+            }
+        }
+        return wolnePokoje;
+    }
+
+    public Reservation utworzRezerwacje(LocalDate start, LocalDate end, Guest guest, Room room) {
+        if (czyZajety(room, start, end)) {
+            throw new RoomUnavailableException("Pokój o numerze " + room.getNumer() + " jest już zajęty w tym terminie!");
+        }
+
+        Reservation nowa = new Reservation(start, end, guest, room);
+        rezerwacje.add(nowa);
+        return nowa;
     }
 
     public double obliczKoszt() {
