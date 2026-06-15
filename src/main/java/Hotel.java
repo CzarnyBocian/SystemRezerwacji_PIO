@@ -28,18 +28,7 @@ public class Hotel {
         List<Room> wolnePokoje = new ArrayList<>();
 
         for (Room pokoj : pokoje) {
-            boolean czyZajety = false;
-            for (Reservation rezerwacja : rezerwacje) {
-
-                if (rezerwacja.getRoom().equals(pokoj) && rezerwacja.getStatus() != ReservationStatus.ANULOWANA) {
-
-                    if (start.isBefore(rezerwacja.getDataDo()) && end.isAfter(rezerwacja.getDataOd())) {
-                        czyZajety = true;
-                        break;
-                    }
-                }
-            }
-            if (!czyZajety) {
+            if (!czyZajety(pokoj, start, end)) {
                 wolnePokoje.add(pokoj);
             }
         }
