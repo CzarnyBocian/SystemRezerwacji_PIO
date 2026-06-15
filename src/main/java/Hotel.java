@@ -47,6 +47,10 @@ public class Hotel {
     }
 
     public Reservation utworzRezerwacje(LocalDate start, LocalDate end, Guest guest, Room room) {
+        if (end.isBefore(start) || end.isEqual(start)) {
+            throw new IllegalArgumentException("Data wyjazdu musi byc pozniejsza niz data przyjazdu!");
+        }
+
         if (czyZajety(room, start, end)) {
             throw new RoomUnavailableException("Pokój o numerze " + room.getNumer() + " jest już zajęty w tym terminie!");
         }

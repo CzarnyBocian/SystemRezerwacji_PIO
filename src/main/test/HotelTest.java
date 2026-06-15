@@ -96,4 +96,18 @@ public class HotelTest
         java.util.List<Room> wolnePoAnulowaniu = hotel.wyszukajWolne(start, end);
         assertTrue(wolnePoAnulowaniu.contains(pokoj), "Pokój powinien ponownie pojawić się w wynikach wyszukiwania po anulowaniu");
     }
+
+    @Test
+    void testUtworzRezerwacje_NielogiczneDaty_PowinnoRzucicWyjatek() {
+        Hotel hotel = new Hotel();
+        Guest gosc = new Guest("1", "Jan", "Kowalski");
+        Room pokoj = new Room("101", RoomType.STANDARD, 200);
+
+        LocalDate start = LocalDate.of(2026, 6, 10);
+        LocalDate end = LocalDate.of(2026, 6, 5);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            hotel.utworzRezerwacje(start, end, gosc, pokoj);
+        }, "System powinien zablokowac rezerwacje z data wyjazdu wczesniejsza niz przyjazdu");
+    }
 }
