@@ -110,4 +110,46 @@ public class HotelTest
             hotel.utworzRezerwacje(start, end, gosc, pokoj);
         }, "System powinien zablokowac rezerwacje z data wyjazdu wczesniejsza niz przyjazdu");
     }
+
+    @Test
+    void testWyszukajWolne_PoStandardzieStandard_PowinnoZwrocicTylkoPokojeStandard()
+    {
+        Hotel hotel = new Hotel();
+        hotel.getPokoje().add(new Room("1", RoomType.STANDARD, 100));
+        hotel.getPokoje().add(new Room("2", RoomType.VIP, 500));
+        hotel.getPokoje().add(new Room("3", RoomType.PREMIUM, 250));
+
+        java.util.List<Room> wolneStandard = hotel.wyszukajWolne(LocalDate.now(), LocalDate.now().plusDays(1), RoomType.STANDARD);
+
+        assertEquals(1, wolneStandard.size(), "Powinien znalezc tylko jeden pokoj STANDARD");
+        assertEquals(RoomType.STANDARD, wolneStandard.get(0).getStandard(), "Znaleziony pokoj powinien byc klasy STANDARD");
+    }
+
+    @Test
+    void testWyszukajWolne_PoStandardzieVip_PowinnoZwrocicTylkoPokojeVip()
+    {
+        Hotel hotel = new Hotel();
+        hotel.getPokoje().add(new Room("1", RoomType.STANDARD, 100));
+        hotel.getPokoje().add(new Room("2", RoomType.VIP, 500));
+        hotel.getPokoje().add(new Room("3", RoomType.PREMIUM, 250));
+
+        java.util.List<Room> wolneVip = hotel.wyszukajWolne(LocalDate.now(), LocalDate.now().plusDays(1), RoomType.VIP);
+
+        assertEquals(1, wolneVip.size(), "Powinien znalezc tylko jeden pokoj VIP");
+        assertEquals(RoomType.VIP, wolneVip.get(0).getStandard(), "Znaleziony pokoj powinien byc klasy VIP");
+    }
+
+    @Test
+    void testWyszukajWolne_PoStandardziePremium_PowinnoZwrocicTylkoPokojePremium()
+    {
+        Hotel hotel = new Hotel();
+        hotel.getPokoje().add(new Room("1", RoomType.STANDARD, 100));
+        hotel.getPokoje().add(new Room("2", RoomType.VIP, 500));
+        hotel.getPokoje().add(new Room("3", RoomType.PREMIUM, 250));
+
+        java.util.List<Room> wolnePremium = hotel.wyszukajWolne(LocalDate.now(), LocalDate.now().plusDays(1), RoomType.PREMIUM);
+
+        assertEquals(1, wolnePremium.size(), "Powinien znalezc tylko jeden pokoj PREMIUM");
+        assertEquals(RoomType.PREMIUM, wolnePremium.get(0).getStandard(), "Znaleziony pokoj powinien byc klasy PREMIUM");
+    }
 }

@@ -74,4 +74,19 @@ public class Hotel {
     public List<Reservation> getRezerwacje() {
         return rezerwacje;
     }
+
+    public List<Room> wyszukajWolne(LocalDate start, LocalDate end, RoomType standard)
+    {
+        List<Room> wszystkieWolne = wyszukajWolne(start, end);
+        List<Room> pasujaceStandardem = new ArrayList<>();
+
+        for(Room pokoj : wszystkieWolne)
+        {
+            if(pokoj.getStandard() == standard)
+            {
+                pasujaceStandardem.add(pokoj);
+            }
+        }
+        return pasujaceStandardem;
+    }
 }
