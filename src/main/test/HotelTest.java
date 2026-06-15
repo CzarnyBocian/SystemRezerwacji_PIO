@@ -49,10 +49,14 @@ public class HotelTest
     void testObliczKoszt_PowinnoPoprawnieWyliczycCene()
     {
         Hotel hotel = new Hotel();
+        Guest gosc = new Guest("1", "Andrzej", "Kowalski");
+        Room pokoj = new Room("101", RoomType.STANDARD, 200.0);
+
+        hotel.utworzRezerwacje(LocalDate.now(), LocalDate.now().plusDays(3), gosc, pokoj);
 
         double koszt = hotel.obliczKoszt();
 
-        assertEquals(600.0, koszt, "Koszt rezerwacji powinien zostac poprawnie obliczony i nie wynosic 0.0");
+        assertEquals(600.0, koszt, "Koszt rezerwacji powinien zostac poprawnie obliczony(600) i nie wynosic 0.0");
     }
 
     @Test

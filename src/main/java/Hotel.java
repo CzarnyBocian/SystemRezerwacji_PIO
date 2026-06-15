@@ -57,7 +57,15 @@ public class Hotel {
     }
 
     public double obliczKoszt() {
-        return 0.0;
+        double sumaKoszty = 0.0;
+
+        for (Reservation rezerwacja : rezerwacje) {
+            if (rezerwacja.getStatus() != ReservationStatus.ANULOWANA) {
+                sumaKoszty += rezerwacja.obliczKoszt();
+            }
+        }
+
+        return sumaKoszty;
     }
 
     public void anuluj(Reservation rezerwacjaDoAnulowania) {
