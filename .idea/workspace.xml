@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="94d6f153-f0f0-4c96-9455-c350d64e3bcc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Hotel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Hotel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/HotelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/HotelTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +17,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "vovaopolskyi"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/CzarnyBocian/SystemRezerwacji_PIO",
+    "accountId": "637329d7-f987-4563-b36a-4b885187593e"
+  }
+}]]></component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
@@ -36,7 +50,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "feature/anuluj-rezerwacje",
+    "git-widget-placeholder": "feature/wyszukiwanie-standard",
     "kotlin-language-version-configured": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -57,6 +71,7 @@
       <option name="presentableId" value="Default" />
       <updated>1780329689008</updated>
       <workItem from="1780914288035" duration="3103000" />
+      <workItem from="1781521115303" duration="733000" />
     </task>
     <servers />
   </component>

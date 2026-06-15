@@ -96,4 +96,17 @@ public class HotelTest
         java.util.List<Room> wolnePoAnulowaniu = hotel.wyszukajWolne(start, end);
         assertTrue(wolnePoAnulowaniu.contains(pokoj), "Pokój powinien ponownie pojawić się w wynikach wyszukiwania po anulowaniu");
     }
+
+    @Test
+    void testWyszukajWolne_PoStandardzie_PowinnoZwrocicTylkoOdpowiedniePokoje()
+    {
+        Hotel hotel = new Hotel();
+        hotel.getPokoje().add(new Room("1", RoomType.STANDARD, 100));
+        hotel.getPokoje().add(new Room("2", RoomType.VIP, 500));
+
+        java.util.List<Room> wolneVIP = hotel.wyszukajWolne(LocalDate.now(), LocalDate.now().plusDays(1), RoomType.VIP);
+
+        assertEquals(1, wolneVIP.size(), "Powinien znalezc tylko jeden pokoj VIP");
+        assertEquals(RoomType.VIP, wolneVIP.get(0).getStandard(), "Znaleziony pokoj powinien byc VIPem");
+    }
 }
